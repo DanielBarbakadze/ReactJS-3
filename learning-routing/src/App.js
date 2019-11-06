@@ -1,6 +1,6 @@
 import React from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Button } from 'react-bootstrap';
+import { Home, Users, About } from './pages';
 import {
   BrowserRouter as Router,
   Switch,
@@ -42,21 +42,4 @@ export default function App() {
       </div>
     </Router>
   );
-}
-
-function Home() {
-  return <div>
-          <h2>Home</h2>
-          <Button variant="danger">
-            Submit
-          </Button>
-        </div>;
-}
-
-function About() {
-  return <h2>About</h2>;
-}
-
-function Users() {
-  return <h2>Users</h2>;
 }
