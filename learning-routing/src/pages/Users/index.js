@@ -5,10 +5,11 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link
+  Link,
+  withRouter
 } from "react-router-dom";
 
-export default function Users() {
+function Users({history}) {
 
     const [users, setUsers] = useState([]);
 
@@ -20,34 +21,40 @@ export default function Users() {
               name: randomName.first()
             })
         }
-        console.log(userArray);
+        // console.log(userArray);
         setUsers(userArray);
     }, []);
 
     function handleUserClick(user) {
-      console.log(user);
+      history.push(`/users/${user.id}`)
+      // console.log(user);
     }
 
-    return  <div>
-              <ul>
-                  <li>
-                    <Link to="/users/profile">Profile</Link>
-                  </li>
-                  <li>
-                    <Link to="/users/info">Info</Link>
-                  </li>
-                  {users.map(user =>
-                      <li key={user.id} onClick={() => handleUserClick(user)}>
-                        {user.name}
-                      </li>
-                  )}
-                </ul>
-
-              <Switch>
-                <Route path="/users/:id">
-                  <User/>
-                </Route>
-              </Switch>
+    return  <div style={{display: 'flex'}}>
+              <div style={{flex: 1}}>
+                <ul>
+                    {/* <li>
+                      <Link to="/users/info">Info</Link>
+                    </li> */}
+                    {users.map(user =>
+                        <li key={user.id} onClick={() => handleUserClick(user)}>
+                          {user.name}
+                        </li>
+                    )}
+                  </ul>
+              </div>
+              <div style={{flex: 1}}>
+                <Switch>
+                  {/* <Route path="/users/info">
+                    {console.log('works')}
+                  </Route> */}
+                  <Route path="/users/:id">
+                    <User users = {users} />
+                  </Route>
+                </Switch>
+              </div>
 
               </div>;
   }
+
+  export default withRouter(Users) 

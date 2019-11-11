@@ -1,7 +1,20 @@
 import React from 'react';
+import { useParams } from 'react-router';
 
-export default function User() {
-    return <div>
-            <h2>User Folder</h2>
-          </div>;
+export default function User({users}) {
+        let { id } = useParams();
+
+        if(!users.length) {
+                return (
+                        <div>
+                                No Data
+                        </div>
+                )
+        }
+
+        return (
+                <div>
+                        {users[id].name}
+                </div>
+        )   
   }
